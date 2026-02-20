@@ -34,7 +34,9 @@
 //   ul.append(newCircle);
 // });
 
-// 2. BEI CLICK KREIS AN Maus POSITION________________________________________________
+// 2. BEI CLICK KREIS AN MAUS POSITION________________________________________________
+
+import { audio } from "./utils/utils.js";
 
 const ul = document.querySelector('[data-js="circleContainer"]');
 // const circle = document.querySelectorAll('[data-js="circle"]');
@@ -50,5 +52,20 @@ ul.addEventListener("click", (event) => {
   newCircle.style.left = x - 50 + "px";
   newCircle.style.top = y - 50 + "px";
 
+  // RANDOM COLOR
+  function getRandomColor(min, max) {
+    const r = Math.random() * (max - min) + min;
+    const g = Math.random() * (max - min) + min;
+    const b = Math.random() * (max - min) + min;
+    return `rgb(${r}, ${g}, ${b})`;
+  }
+
+  let randomColor = getRandomColor(0, 255);
+  newCircle.style.backgroundColor = randomColor;
+
   ul.append(newCircle);
+
+  //   //SOUND
+  const randomSound = Math.floor(Math.random() * audio.length);
+  audio[randomSound].play();
 });
